@@ -5,6 +5,6 @@ import borrowRoute from "../borrow/borrow.route";
 const routes = Router();
 
 routes.use("/api/books", bookRoute)
-routes.use("/api/borrow", borrowRoute)
+routes.use("/api", borrowRoute)
 
 export default routes;

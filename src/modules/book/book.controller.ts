@@ -25,35 +25,41 @@ const createBook = async (req: Request, res: Response) => {
 //get all books
 const getAllBooks = async (req: Request, res: Response) => {
   try {
-    const { filter, sortBy, sort, limit } = req.query;
+    // const { filter, sortBy, sort, limit=10, page=1 } = req.query;
+    const page = Number(req.query.page) || 1;
 
     //filtering
-    const filterValue: any = {};
-    if (filter) {
-      filterValue.genre = filter;
-    }
+    // const filterValue: any = {};
+    // if (filter) {
+    //   filterValue.genre = filter;
+    // }
 
     //sorting
-    const sortingOption: any = {};
-    if (sortBy) {
-      const sortValue = sort === "asc" ? 1 : -1;
-      sortingOption[String(sortBy)] = sortValue;
-    }
+    // const sortingOption: any = {};
+    // if (sortBy) {
+    //   const sortValue = sort === "asc" ? 1 : -1;
+    //   sortingOption[String(sortBy)] = sortValue;
+    // }
+
+    const limit = 10;
+    const skip = (page - 1) * limit;
 
     //limiting
-    let limitValue: number;
-    if (limit) {
-      limitValue = Number(limit);
-    } else {
-      limitValue = 10;
-    }
+    // const limitValue = Number(limit);
+    // const pageValue = Number(page);
+    // const skipValue = (pageValue - 1) * limitValue;
 
-    const books = await Book.find(filterValue)
-      .sort(sortingOption)
-      .limit(limitValue);
+    const total = await Book.countDocuments();
+    const books = await Book.find()
+      .skip(skip)
+      .limit(limit);
+      
     res.status(201).send({
       success: true,
       message: "Books retrieved successfully",
+      data: {
+        total,
+      },
       books,
     });
   } catch (error) {
@@ -86,7 +92,7 @@ const getBookById = async (req: Request, res: Response) => {
 //update book
 const updateBook = async (req: Request, res: Response) => {
   try {
-    const bookId = req.params.bookId;
+    const bookId = req.params.id;
     const book = await Book.findByIdAndUpdate(bookId, req.body, {
       new: true,
       runValidators: true,
@@ -108,7 +114,7 @@ const updateBook = async (req: Request, res: Response) => {
 //delete book
 const deleteBook = async (req: Request, res: Response) => {
   try {
-    const bookId = req.params.bookId;
+    const bookId = req.params.id;
 
     const book = await Book.findByIdAndDelete(bookId);
 

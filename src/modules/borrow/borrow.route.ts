@@ -3,7 +3,7 @@ import { borrowController } from "./borrow.controller";
 
 const borrowRoute = Router();
 
-borrowRoute.post("/", borrowController.createBorrow);
-borrowRoute.get("/", borrowController.borrowedBooks);
+borrowRoute.post("/borrow", borrowController.createBorrow);
+borrowRoute.get("/borrow-summary", borrowController.borrowedBooks);
 
 export default borrowRoute;
