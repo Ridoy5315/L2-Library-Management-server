@@ -7,7 +7,6 @@ A scalable backend API for managing a library system. Built with ``TypeScript``,
 - Create a new book record
 - Get all books with:
   - Filtering by genre (`FICTION`, `NON_FICTION`, `SCIENCE`, `HISTORY`, `BIOGRAPHY`, `FANTASY`)
-  - Sorting by creation date (`asc` or `desc`)
   - Limit the number of returned books (default limit 10)
 - Get a single book by bookID
 - Update book details
@@ -44,8 +43,7 @@ A scalable backend API for managing a library system. Built with ``TypeScript``,
 ### Clone the Repository
 **1. Clone the Repository**
 <pre><code>
-git clone https://github.com/Ridoy5315/library-management.git
-cd library-management
+https://github.com/Ridoy5315/L2-Library-Management-server.git
 </code></pre>
 **2. Install Dependencies**
 <pre><code>
@@ -67,17 +65,16 @@ npm run dev
 |  Method   |     Endpoint     |
 |-----------|------------------|
 |   POST    |    /api/books    |
-|    GET    |    /api/books    |
-|    GET    | /api/books?filter=FANTASY&sortBy=createdAt&sort=desc&limit=5 |
+|    GET    | /api/books?page=${page} |
 |    GET    |  /api/books/:id  |
-|   PATCH   |  /api/books/:id  |
-|   DELETE  |  /api/books/:id  |
+|   PATCH   |  /api/books/edit-book/${id}  |
+|   DELETE  |  /api/books/delete-book/${id}  |
 
 ### Borrow Routes 
 |  Method   |     Endpoint     |
 |-----------|------------------|
 |   POST    |    /api/borrow   |
-|    GET    |    /api/borrow   |
+|    GET    |    /api/borrow-summary   |
 
 ### Testing
 You can use Postman, Insomnia or others app to test the API endpoints manually. But i am used Postman to test the API.
