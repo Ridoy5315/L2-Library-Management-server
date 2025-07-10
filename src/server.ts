@@ -9,6 +9,9 @@ const app = express();
 app.use(cors({
   origin: ['https://library-management-client-mu.vercel.app']
 }));
+// app.use(cors({
+//   origin: ['http://localhost:5175']
+// }));
 app.use(express.json());
 
 app.use(routes);
