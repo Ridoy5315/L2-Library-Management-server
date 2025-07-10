@@ -6,7 +6,9 @@ import routes from "./modules/routes";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://library-management-client-mu.vercel.app']
+}));
 app.use(express.json());
 
 app.use(routes);

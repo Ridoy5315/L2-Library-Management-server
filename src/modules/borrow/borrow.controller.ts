@@ -34,7 +34,7 @@ const createBorrow = async (req : Request, res : Response) => {
 const borrowedBooks = async (req : Request, res : Response) => {
      try {
           //aggregation
-          const data = await Borrow.aggregate([
+          const borrowedBooks = await Borrow.aggregate([
                { $group : {
                     _id : '$book',
                     totalQuantity : { $sum : '$quantity'} 
@@ -60,7 +60,7 @@ const borrowedBooks = async (req : Request, res : Response) => {
           res.status(201).send({
                success : true,
                message : 'Borrowed books summary retrieved successfully',
-               data
+               borrowedBooks
           })
      } catch (error : any) {
           res.status(400).send({
